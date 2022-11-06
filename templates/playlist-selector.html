@@ -4,9 +4,13 @@
             <div class="form-group">
                 <label for="playlist" style="flex: 1;">Playlist</label>
                 <div class="form-fields">
-                    <select name="playlist">
+                    <select name="playlist" value="{{value}}">
                         {{#each playlists}}
-                        <option value="{{id}}">{{name}}</option>
+                        <option value="{{id}}"
+                        {{#if selected}}
+                        selected
+                        {{/if}}
+                        >{{name}}</option>
                         {{/each}}
                     </select>
                 </div>

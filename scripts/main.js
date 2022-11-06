@@ -12,7 +12,12 @@ Hooks.once('init', function() {
         const playlistId = li.parents('.playlist').data('document-id');
         const playlist = game.playlists.get(playlistId);
         const sound = playlist.sounds.get(li.data('sound-id'));
-        new PlaylistSelectionDialog(sound).render(true);
+        new PlaylistSelectionDialog(
+          {
+            sound: sound,
+            currentPlaylistId: playlistId,
+          }
+        ).render(true);
       }
     });
 
@@ -23,31 +28,49 @@ Hooks.once('init', function() {
 
 
 export class PlaylistSelectionDialog extends FormApplication {
+
   constructor(object, app, options = {}) {
-      super(object, options);
-      this.app = app;
+    super(object, options);
   }
 
   static get defaultOptions() {
-      return mergeObject(super.defaultOptions, {
-          id: moduleName + 'playlist-dialog',
-          classes: ['form'],
-          title: 'Add to Playlist',
-          template: 'modules/' + moduleName + '/templates/playlist-selector.html',
-          width: 500,
-          submitOnChange: false,
-          closeOnSubmit: true
-      });
+    return mergeObject(super.defaultOptions, {
+        id: moduleName + 'playlist-dialog',
+        classes: ['form'],
+        title: 'Add to Playlist',
+        template: 'modules/' + moduleName + '/templates/playlist-selector.html',
+        width: 500,
+        submitOnChange: false,
+        closeOnSubmit: true
+    });
   }
 
   getData(options) {
-      let data = mergeObject(super.getData(options),
-          {
-              playlists: game.playlists
-          },
-          { recursive: false }
-      );
 
-      return data;
+    let gamePlaylists = game.playlists.map((p) => {
+      return {
+        id: p.id,
+        name: p.name,
+        selected: p.id == this.object.currentPlaylistId
+      }});
+
+    let data = mergeObject(
+      super.getData(options), 
+      {playlists: gamePlaylists},
+      {recursive: false}
+    );
+
+    return data;
+  }
+
+  activateListeners(html) {
+    super.activateListeners(html);
+    $('button[name="submit"]', html).click(this._onSubmit.bind(this));
+  }
+
+  async _updateObject(event, formData) {
+    if (formData.playlist != this.object.currentPlaylistId) {
+      console.log('Chose new id for sound: ' + this.object.currentPlaylistId);
+    }
   }
 }
