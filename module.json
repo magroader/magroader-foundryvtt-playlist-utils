@@ -1,0 +1,31 @@
+{
+    "id": "magroader-playlist-utils",
+    "title": "MagRoader's Playlist Utils",
+    "description": "Utilities for playlists.",
+    "authors": [
+        { "name": "MagRoader" }
+    ],
+    "version": "0.2.0",
+    "url": "https://github.com/magroader/magroader-foundryvtt-playlist-utils",
+    "manifest": "https://raw.githubusercontent.com/magroader/magroader-foundryvtt-playlist-utils/main/module.json",
+    "download": "https://github.com/magroader/magroader-foundryvtt-playlist-utils/archive/refs/tags/v0.1.0.zip",
+    "esmodules": [
+        "./scripts/main.js"
+    ],
+    "compatibility": {
+      "minimum": "10",
+      "verified": "10"
+    },
+    "relationships": {
+        "requires": [
+            {
+                "id": "lib-wrapper",
+                "type": "module",
+                "compatibility": {
+                    "minimum": "1.0.0.0",
+                    "verified": "1.12.10.0"
+                }
+            }
+        ]
+    }
+}
