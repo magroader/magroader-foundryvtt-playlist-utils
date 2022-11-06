@@ -1,0 +1,21 @@
+<div class="monks-enhanced-journal flexcol editattributes monks-journal-sheet sheet">
+    <form>
+        <div class="dialog-content">
+            <div class="form-group">
+                <label for="playlist" style="flex: 1;">Playlist</label>
+                <div class="form-fields">
+                    <select name="playlist">
+                        {{#each choices}}
+                        <option value="{{val}}">{{label}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <footer class="sheet-footer flexrow">
+            <button type="button" name="submit">
+                <i class="far fa-arrow-alt-circle-right"></i> Add to Playlist
+            </button>
+        </footer>
+    </form>
+</div>
