@@ -6,11 +6,7 @@
                 <div class="form-fields">
                     <select name="playlist">
                         {{#each playlists}}
-                        <optgroup label="{{name}}">
-                            {{#each sounds}}
-                            <option value="{{id}}">{{name}}</option>
-                            {{/each}}
-                        </optgroup>
+                        <option value="{{id}}">{{name}}</option>
                         {{/each}}
                     </select>
                 </div>
