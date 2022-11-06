@@ -25,6 +25,24 @@ Hooks.once('init', function() {
         ).render(true);
       }
     });
+    
+    result.push({
+      name: "Add to Last Playlist",
+      icon: '<i class="far fa-arrow-alt-circle-right"></i>',
+      condition: li => {
+        const playlistId = li.parents('.playlist').data('document-id');
+        return currentPlaylistId != null && currentPlaylistId != playlistId;
+      },
+      callback: async li => {
+        const playlistId = li.parents('.playlist').data('document-id');
+        const playlist = game.playlists.get(playlistId);
+        const sound = playlist.sounds.get(li.data('sound-id'));
+        
+        let soundCopy = sound.toObject();
+        let newPlaylist = game.playlists.get(currentPlaylistId);
+        await PlaylistSound.create(soundCopy, {parent:newPlaylist});
+      }
+    });
 
     return result;
   }, 'WRAPPER');
