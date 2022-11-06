@@ -43,10 +43,7 @@ export class PlaylistSelectionDialog extends FormApplication {
   getData(options) {
       let data = mergeObject(super.getData(options),
           {
-              choices: [
-                {'label': 'someLabel1', 'val': 'someval1'},
-                {'label': 'someLabel2', 'val': 'someval2'}
-              ]
+              playlists: game.playlists
           },
           { recursive: false }
       );
