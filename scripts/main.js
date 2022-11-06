@@ -1,4 +1,5 @@
 let moduleName = "magroader-playlist-utils";
+let currentPlaylistId = null;
 
 Hooks.once('init', function() {
 
@@ -12,10 +13,14 @@ Hooks.once('init', function() {
         const playlistId = li.parents('.playlist').data('document-id');
         const playlist = game.playlists.get(playlistId);
         const sound = playlist.sounds.get(li.data('sound-id'));
+        if (currentPlaylistId == null) {
+          currentPlaylistId = playlistId;
+        }
         new PlaylistSelectionDialog(
           {
             sound: sound,
-            currentPlaylistId: playlistId,
+            originalPlaylistId: playlistId,
+            currentPlaylistId: currentPlaylistId,
           }
         ).render(true);
       }
@@ -69,8 +74,11 @@ export class PlaylistSelectionDialog extends FormApplication {
   }
 
   async _updateObject(event, formData) {
-    if (formData.playlist != this.object.currentPlaylistId) {
-      console.log('Chose new id for sound: ' + this.object.currentPlaylistId);
+    if (formData.playlist != this.object.originalPlaylistId) {
+      let soundCopy = this.object.sound.toObject();
+      let newPlaylist = game.playlists.get(formData.playlist);
+      currentPlaylistId = formData.playlist;
+      await PlaylistSound.create(soundCopy, {parent:newPlaylist});
     }
   }
 }
