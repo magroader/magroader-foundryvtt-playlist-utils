@@ -11,7 +11,7 @@ export class SoundOptions {
       let result = wrapped(...args);
   
       result.push({
-        name: "Add to Playlist",
+        name: "Copy to Playlist",
         icon: '<i class="far fa-arrow-alt-circle-right"></i>',
         callback: li => {
           const playlistId = li.parents('.playlist').data('document-id');
@@ -20,7 +20,7 @@ export class SoundOptions {
           if (this.currentPlaylistId == null) {
             this.currentPlaylistId = playlistId;
           }
-          let dialog = new PlaylistSelectionDialog(
+          new PlaylistSelectionDialog(
             {
               sound: sound,
               originalPlaylistId: playlistId,
@@ -32,7 +32,7 @@ export class SoundOptions {
       });
       
       result.push({
-        name: "Add to Last Playlist",
+        name: "Copy to Last Playlist",
         icon: '<i class="far fa-arrow-alt-circle-right"></i>',
         condition: li => {
           const playlistId = li.parents('.playlist').data('document-id');

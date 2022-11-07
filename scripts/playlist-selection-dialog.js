@@ -12,7 +12,7 @@ export class PlaylistSelectionDialog extends FormApplication {
       return mergeObject(super.defaultOptions, {
           id: moduleName + 'playlist-dialog',
           classes: ['form'],
-          title: 'Add to Playlist',
+          title: 'Copy to Playlist',
           template: 'modules/' + moduleName + '/templates/playlist-selector.html',
           width: 500,
           submitOnChange: false,
