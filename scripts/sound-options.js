@@ -9,7 +9,7 @@ export class SoundOptions {
   init() {
     libWrapper.register(moduleName, 'PlaylistDirectory.prototype._getSoundContextOptions', function (wrapped, ...args) {
       let result = wrapped(...args);
-  
+
       result.push({
         name: "Copy to Playlist",
         icon: '<i class="far fa-arrow-alt-circle-right"></i>',
@@ -30,7 +30,7 @@ export class SoundOptions {
           ).render(true);
         }
       });
-      
+
       result.push({
         name: "Copy to Last Playlist",
         icon: '<i class="far fa-arrow-alt-circle-right"></i>',
@@ -41,14 +41,19 @@ export class SoundOptions {
         callback: async li => {
           const playlistId = li.parents('.playlist').data('document-id');
           const playlist = game.playlists.get(playlistId);
+          if (playlist == null)
+            return;
           const sound = playlist.sounds.get(li.data('sound-id'));
-          
+
           let soundCopy = sound.toObject();
           let newPlaylist = game.playlists.get(this.currentPlaylistId);
-          await PlaylistSound.create(soundCopy, {parent:newPlaylist});
+          if (newPlaylist == null)
+            return;
+
+          await PlaylistSound.create(soundCopy, { parent: newPlaylist });
         }
       });
-  
+
       return result;
     }, 'WRAPPER');
   }

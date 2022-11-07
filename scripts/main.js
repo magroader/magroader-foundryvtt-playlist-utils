@@ -1,7 +1,7 @@
-import {SoundOptions} from './sound-options.js';
+import { SoundOptions } from './sound-options.js';
 
 let soundOptions = new SoundOptions();
 
-Hooks.once('init', function() {
+Hooks.once('init', function () {
   soundOptions.init();
 });
