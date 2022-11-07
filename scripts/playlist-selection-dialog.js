@@ -48,6 +48,9 @@ export class PlaylistSelectionDialog extends FormApplication {
       return;
 
     let soundCopy = this.object.sound.toObject();
+    delete soundCopy._id;
+    delete soundCopy.playing;
+
     let newPlaylist = game.playlists.get(formData.playlist);
     if (newPlaylist == null)
       return;
