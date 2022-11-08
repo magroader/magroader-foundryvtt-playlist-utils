@@ -7,9 +7,7 @@
                     <select name="playlist" value="{{value}}">
                         {{#each playlists}}
                         <option value="{{id}}"
-                        {{#if selected}}
-                        selected
-                        {{/if}}
+                        {{#if selected}}selected{{/if}}
                         >{{name}}</option>
                         {{/each}}
                     </select>
@@ -18,7 +16,7 @@
         </div>
         <footer class="sheet-footer flexrow">
             <button type="button" name="submit">
-                <i class="far fa-arrow-alt-circle-right"></i> Add to Playlist
+                <i class="far fa-copy"></i> Copy to Playlist
             </button>
         </footer>
     </form>

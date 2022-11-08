@@ -12,7 +12,7 @@ export class SoundOptions {
 
       result.push({
         name: "Copy to Playlist",
-        icon: '<i class="far fa-arrow-alt-circle-right"></i>',
+        icon: '<i class="far fa-copy"></i>',
         callback: li => {
           const playlistId = li.parents('.playlist').data('document-id');
           const playlist = game.playlists.get(playlistId);
@@ -33,7 +33,7 @@ export class SoundOptions {
 
       result.push({
         name: "Copy to Last Playlist",
-        icon: '<i class="far fa-arrow-alt-circle-right"></i>',
+        icon: '<i class="far fa-rotate-left"></i>',
         condition: li => {
           const playlistId = li.parents('.playlist').data('document-id');
           return this.currentPlaylistId != null && this.currentPlaylistId != playlistId;
